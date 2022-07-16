@@ -41,6 +41,7 @@ public class Ball {
         return x + size >= Display.WIDTH;
     }
 
+    //move
     public void move() {
         x += SPEED * xCoef;
         y += SPEED * yCoef;
