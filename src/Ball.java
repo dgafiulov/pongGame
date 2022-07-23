@@ -3,8 +3,9 @@ import java.awt.*;
 public class Ball {
     private int x = 500;
     private int y = 300;
-    private final int SPEED = 5;
+    private int speed = 5;
     private int size = 40;
+    private int amountOfCollisions = 0;
 
     private int xCoef = 1;
     private int yCoef = 1;
@@ -34,17 +35,19 @@ public class Ball {
     }
 
     private boolean outOfWorldOnPlayerSide() {
+
         return x <= 0;
     }
 
     private boolean outOfWorldOnEnemySide() {
+
         return x + size >= Display.WIDTH;
     }
 
     //move
     public void move() {
-        x += SPEED * xCoef;
-        y += SPEED * yCoef;
+        x += speed * xCoef;
+        y += speed * yCoef;
 
         //colissions
         if (outOfWorldOnPlayerSide()) {
@@ -55,6 +58,8 @@ public class Ball {
             Main.player.playerDirection = Player.Direction.NONE;
             Main.enemy.enemyDirection = Enemy.Direction.NONE;
             Main.enemy.score++;
+            speed = 5;
+            amountOfCollisions = 0;
         }
         if (outOfWorldOnEnemySide()) {
             Main.player.setY(100);
@@ -64,6 +69,8 @@ public class Ball {
             Main.player.playerDirection = Player.Direction.NONE;
             Main.enemy.enemyDirection = Enemy.Direction.NONE;
             Main.player.score++;
+            speed = 5;
+            amountOfCollisions = 0;
         }
         if ((y + size >= Display.HEIGHT) | (y <=  0)) {
             yCoef *= -1;
@@ -71,10 +78,16 @@ public class Ball {
         if (colisionWithPlayer())  {
             xCoef *= -1;
             ballColor = Color.cyan;
+            amountOfCollisions++;
         }
         if (colisionWithEnemy()) {
             xCoef *= -1;
             ballColor = Color.red;
+            amountOfCollisions++;
+        }
+        if(amountOfCollisions == 5) {
+            ballColor = Color.yellow;
+            speed = 10;
         }
     }
 }
