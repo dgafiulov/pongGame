@@ -60,6 +60,7 @@ public class Ball {
             Main.enemy.score++;
             speed = 5;
             amountOfCollisions = 0;
+            ballColor = Color.white;
         }
         if (outOfWorldOnEnemySide()) {
             Main.player.setY(100);
@@ -71,18 +72,23 @@ public class Ball {
             Main.player.score++;
             speed = 5;
             amountOfCollisions = 0;
+            ballColor = Color.white;
         }
         if ((y + size >= Display.HEIGHT) | (y <=  0)) {
             yCoef *= -1;
         }
         if (collisionWithPlayer())  {
             xCoef *= -1;
-            ballColor = Color.cyan;
+            if (amountOfCollisions < 5) {
+                ballColor = Color.cyan;
+            }
             amountOfCollisions++;
         }
         if (collisionWithEnemy()) {
             xCoef *= -1;
-            ballColor = Color.red;
+            if (amountOfCollisions < 5) {
+                ballColor = Color.red;
+            }
             amountOfCollisions++;
         }
         if(amountOfCollisions == 5) {
