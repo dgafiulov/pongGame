@@ -24,14 +24,14 @@ public class Ball {
         return size;
     }
 
-    private boolean colisionWithPlayer() {
+    private boolean collisionWithPlayer() {
 
-        return x <= Main.player.getX() + Main.player.getWIDTH() & x >= (Main.player.getX() + Main.player.getWIDTH()) - 10 & (y + size / 2) > Main.player.getY() & (y + size / 2) < (Main.player.getY() + Main.player.getHEIHT());
+        return x <= Main.player.getX() + Main.player.getWIDTH() & x >= Main.player.getX() & y > Main.player.getY() & y < (Main.player.getY() + Main.player.getHEIHT());
     }
 
-    private boolean colisionWithEnemy() {
+    private boolean collisionWithEnemy() {
 
-        return x + size >= Main.enemy.getX() & x <= (Main.enemy.getX() + Main.enemy.getWIDTH()) + 10 & (y + size / 2) > Main.enemy.getY() & (y + size / 2) < (Main.enemy.getY() + Main.enemy.getHEIHT());
+        return x + size >= Main.enemy.getX() & x <= (Main.enemy.getX() + Main.enemy.getWIDTH()) & y > Main.enemy.getY() & y < (Main.enemy.getY() + Main.enemy.getHEIHT());
     }
 
     private boolean outOfWorldOnPlayerSide() {
@@ -75,12 +75,12 @@ public class Ball {
         if ((y + size >= Display.HEIGHT) | (y <=  0)) {
             yCoef *= -1;
         }
-        if (colisionWithPlayer())  {
+        if (collisionWithPlayer())  {
             xCoef *= -1;
             ballColor = Color.cyan;
             amountOfCollisions++;
         }
-        if (colisionWithEnemy()) {
+        if (collisionWithEnemy()) {
             xCoef *= -1;
             ballColor = Color.red;
             amountOfCollisions++;
