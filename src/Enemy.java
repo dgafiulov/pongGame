@@ -1,64 +1,20 @@
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class Enemy extends Player {
+public class Enemy extends Character {
 
-    private final int X = Display.WIDTH - getWIDTH() - 25;
-    private int y = 100;
-    //private int score = 0;
-
-    public enum Direction {
-        UP,
-        DOWN,
-        NONE
+    public Enemy() {
+        x = Display.WIDTH - getWIDTH() - 25;
+        y = 100;
+        c = Color.red;
+        scoreY = 40;
     }
 
-    @Override
-    public int getX() {
-        return X;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public void setY(int y) { this.y = y; }
-
-    static public Direction enemyDirection = Direction.NONE;
-
-    public static void KeyPressed(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_UP) {
-            enemyDirection = Direction.UP;
-        }
-
-        else if (key == KeyEvent.VK_DOWN) {
-            enemyDirection = Direction.DOWN;
-        }
-
-        else if (key == KeyEvent.VK_RIGHT) {
-            enemyDirection = Direction.NONE;
-        }
-
-    }
-
-    @Override
-    public void move() {
-        switch (enemyDirection) {
-            case UP:
-                if (y >= 0) {
-                    y -= SPEED;
-                }
-                break;
-            case DOWN:
-                if ((y + getHEIHT()) <= Display.HEIGHT) {
-                    y += SPEED;
-                }
-                break;
+    public void KeyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP -> dir = Direction.UP;
+            case KeyEvent.VK_DOWN -> dir = Direction.DOWN;
+            case KeyEvent.VK_RIGHT -> dir = Direction.NONE;
         }
     }
-
 }

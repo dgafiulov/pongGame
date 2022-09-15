@@ -3,7 +3,7 @@ import java.awt.*;
 public class Ball {
     private int x = 500;
     private int y = 300;
-    private int speed = 5;
+    private int speed = 1;
     private int size = 40;
     private int amountOfCollisions = 0;
 
@@ -26,12 +26,12 @@ public class Ball {
 
     private boolean collisionWithPlayer() {
 
-        return x <= Main.player.getX() + Main.player.getWIDTH() & x >= Main.player.getX() & y > Main.player.getY() & y < (Main.player.getY() + Main.player.getHEIHT());
+        return x <= Main.player.getX() + Main.player.getWIDTH() & x >= Main.player.getX() & y > Main.player.getY() & y < (Main.player.getY() + Main.player.getHEIGHT());
     }
 
     private boolean collisionWithEnemy() {
 
-        return x + size >= Main.enemy.getX() & x <= (Main.enemy.getX() + Main.enemy.getWIDTH()) & y > Main.enemy.getY() & y < (Main.enemy.getY() + Main.enemy.getHEIHT());
+        return x + size >= Main.enemy.getX() & x <= (Main.enemy.getX() + Main.enemy.getWIDTH()) & y > Main.enemy.getY() & y < (Main.enemy.getY() + Main.enemy.getHEIGHT());
     }
 
     private boolean outOfWorldOnPlayerSide() {
@@ -55,10 +55,10 @@ public class Ball {
             Main.enemy.setY(100);
             x = 500;
             y = 300;
-            Main.player.playerDirection = Player.Direction.NONE;
-            Main.enemy.enemyDirection = Enemy.Direction.NONE;
+            Main.player.dir = Player.Direction.NONE;
+            Main.enemy.dir = Enemy.Direction.NONE;
             Main.enemy.score++;
-            speed = 5;
+            speed = 1;
             amountOfCollisions = 0;
             ballColor = Color.white;
         }
@@ -67,14 +67,14 @@ public class Ball {
             Main.enemy.setY(100);
             x = 500;
             y = 300;
-            Main.player.playerDirection = Player.Direction.NONE;
-            Main.enemy.enemyDirection = Enemy.Direction.NONE;
+            Main.player.dir = Player.Direction.NONE;
+            Main.enemy.dir = Enemy.Direction.NONE;
             Main.player.score++;
-            speed = 5;
+            speed = 1;
             amountOfCollisions = 0;
             ballColor = Color.white;
         }
-        if ((y + size >= Display.HEIGHT) | (y <=  0)) {
+        if ((y + size * 2 >= Display.HEIGHT) | (y <=  0)) {
             yCoef *= -1;
         }
         if (collisionWithPlayer())  {
@@ -93,7 +93,7 @@ public class Ball {
         }
         if(amountOfCollisions == 5) {
             ballColor = Color.yellow;
-            speed = 10;
+            speed = 2;
         }
     }
 }

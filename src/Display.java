@@ -7,6 +7,8 @@ public class Display {
 
     public static void main(String[] args) {
 
+        System.out.println(Display.WIDTH - Enemy.getWIDTH() - 25);
+
         JFrame frame = new JFrame("pong");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(WIDTH + 12, HEIGHT + 35);

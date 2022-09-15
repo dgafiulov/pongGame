@@ -9,7 +9,7 @@ public class Main extends JPanel implements ActionListener {
 
     //creating all we need
     Timer timer = new Timer(1, this);
-    Font scoreFont = new Font("Arial", Font.PLAIN, 20);
+    static Font scoreFont = new Font("Arial", Font.PLAIN, 20);
     Font menuFont = new Font("Arial", Font.PLAIN, 40);
     Font headerFont = new Font("Arial", Font.PLAIN, 100);
     int[] img1 = {0, 0, Display.WIDTH, Display.HEIGHT};
@@ -29,16 +29,11 @@ public class Main extends JPanel implements ActionListener {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                Player.KeyPressed(e);
-                Enemy.KeyPressed(e);
+                player.KeyPressed(e);
+                enemy.KeyPressed(e);
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     gameStarted = true;
                 }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                Player.KeyReleased(e);
             }
         });
     }
@@ -48,16 +43,11 @@ public class Main extends JPanel implements ActionListener {
         if (gameStarted) {
             g.setColor(Color.black);
             g.fillRect(0, 0, Display.WIDTH, Display.HEIGHT);
-            g.setColor(Color.cyan);
-            g.fillRect(player.getX(), player.getY(), player.getWIDTH(), player.getHEIHT());
+            player.draw(g);
             g.setColor(ball.ballColor);
             g.fillOval(ball.getX(), ball.getY(), ball.getSize(), ball.getSize());
-            g.setColor(Color.RED);
-            g.fillRect(enemy.getX(), enemy.getY(), enemy.getWIDTH(), enemy.getHEIHT());
-            g.setFont(scoreFont);
-            g.drawString(String.valueOf(enemy.score), 0, 40);
-            g.setColor(Color.cyan);
-            g.drawString(String.valueOf(player.score), 0, 20);
+            enemy.draw(g);
+
         }
         else {
             g.setColor(Color.black);
